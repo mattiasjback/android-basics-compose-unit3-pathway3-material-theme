@@ -131,10 +131,12 @@ fun DogInformation(@StringRes dogName: Int, dogAge: Int, modifier: Modifier = Mo
     Column {
         Text(
             text = stringResource(dogName),
-            modifier = modifier.padding(top = 8.dp)
+            modifier = modifier.padding(top = 8.dp),
+            style = MaterialTheme.typography.h2
         )
         Text(
             text = stringResource(R.string.years_old, dogAge),
+            style = MaterialTheme.typography.body1
         )
     }
 }
