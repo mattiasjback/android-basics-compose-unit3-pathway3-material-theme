@@ -89,20 +89,24 @@ fun DogItem(dog: Dog, modifier: Modifier = Modifier) {
             .padding(8.dp),
         elevation = 4.dp
     ) {
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(8.dp)
-        ) {
-            DogIcon(dog.imageResourceId)
-            DogInformation(dog.name, dog.age)
-            Spacer(modifier = Modifier.weight(1f))
-            DogItemButton(
-                expanded = expanded,
-                onClick = { expanded = !expanded }
-            )
+        Column() {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(8.dp)
+            ) {
+                DogIcon(dog.imageResourceId)
+                DogInformation(dog.name, dog.age)
+                Spacer(modifier = Modifier.weight(1f))
+                DogItemButton(
+                    expanded = expanded,
+                    onClick = { expanded = !expanded }
+                )
+            }
+            if(expanded) {
+                DogHobby(dogHobby = dog.hobbies)
+            }
         }
-        
     }
 }
 
@@ -117,6 +121,29 @@ fun DogItemButton(
             imageVector = if (expanded) Icons.Filled.ExpandLess else Icons.Filled.ExpandMore,
             contentDescription = stringResource(id = R.string.expand_button_content_description),
             tint = MaterialTheme.colors.secondary
+        )
+    }
+}
+
+@Composable
+fun DogHobby(
+    @StringRes dogHobby: Int,
+    modifier: Modifier = Modifier
+) {
+    Column(
+        modifier = modifier.padding(
+        start = 16.dp,
+        top = 8.dp,
+        end = 16.dp,
+        bottom = 16.dp)
+    ) {
+        Text(
+            text = stringResource(id = R.string.about),
+            style = MaterialTheme.typography.h3
+        )
+        Text(
+            text = stringResource(id = dogHobby),
+            style = MaterialTheme.typography.body1
         )
     }
 }
